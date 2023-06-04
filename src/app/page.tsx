@@ -1,95 +1,33 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+import { getHighlighter, highlight } from "@lib/shiki";
+import { readFileSync } from 'fs';
 
-export default function Home() {
+export default async function Home() {
+  const code = await getCode();
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
+    <main className="py-20 px-12 text-center flex flex-col items-center gap-20px">
+      <h1 className="font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent text-6xl tracking-tight">Hello UnoCSS</h1>
+      <div className="flex gap-4 justify-center">
+        <button className="inline-flex items-center gap-2.5 justify-center rounded-md text-sm font-medium transition-colors h-fit px-5 py-2.5 bg-neutral-700 text-neutral-100 hover:bg-neutral-800 active:bg-neutral-900">Get Started</button>
+        <button
+          bg="transparent hover:neutral-200 active:neutral-300"
+          text="sm text-neutral-900"
+          font="medium"
+          p="x-4 y-2.5"
+          rounded="md"
+        >
+          Learn More
+        </button>
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+      <div
+        className="max-w-4xl"
+        dangerouslySetInnerHTML={{ __html: code }}
+      />
     </main>
   )
+}
+
+async function getCode() {
+  const highlighter = await getHighlighter();
+  const code = readFileSync('src/app/page.tsx', "utf8")
+  return await highlight(highlighter, code);
 }

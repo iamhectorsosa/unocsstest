@@ -5,9 +5,9 @@ import { readFileSync } from 'fs';
 export default async function Home() {
   const code = await getCode();
   return (
-    <main className="py-20 px-12 text-center flex flex-col items-center gap-20px">
-      <h1 className="font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent text-6xl tracking-tight">Hello UnoCSS</h1>
-      <div className="flex gap-3 justify-center">
+    <main className="flex flex-col items-center gap-20px px-12 py-20 text-center">
+      <h1 className="from-indigo-500 via-purple-500 to-pink-500 bg-gradient-to-r bg-clip-text text-6xl font-bold tracking-tight text-transparent">Hello UnoCSS</h1>
+      <div className="flex justify-center gap-3">
         <Buttons />
       </div>
       <div

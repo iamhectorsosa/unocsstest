@@ -1,7 +1,7 @@
 export const Buttons = () => {
   return (
     <>
-      <button className="rounded-md text-sm font-medium px-5 py-2.5 bg-neutral-700 text-neutral-100 hover:bg-neutral-800 active:bg-neutral-900 ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300 focus-visible:ring-offset-2">
+      <button className="rounded-md bg-neutral-700 px-5 py-2.5 text-sm font-medium text-neutral-100 ring-offset-white active:bg-neutral-900 hover:bg-neutral-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-300">
         Get Started
       </button>
       <button
